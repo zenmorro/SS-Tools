@@ -1,0 +1,316 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <!-- ============================================================
+         Palette ispirata a IMPERO (impero.zenmorro.it)
+         near-black + accento viola + accenti ciano/verde/arancio
+         ============================================================ -->
+
+    <Color x:Key="Impero.BackgroundColor">#FF0A0A0E</Color>
+    <Color x:Key="Impero.BackgroundDeepColor">#FF050507</Color>
+    <Color x:Key="Impero.SurfaceColor">#FF131319</Color>
+    <Color x:Key="Impero.CardColor">#FF16161D</Color>
+    <Color x:Key="Impero.CardHoverColor">#FF1E1E27</Color>
+    <Color x:Key="Impero.BorderColor">#FF272733</Color>
+    <Color x:Key="Impero.SidebarColor">#FF0C0C11</Color>
+
+    <Color x:Key="Impero.AccentColor">#FF7B39ED</Color>
+    <Color x:Key="Impero.AccentDeepColor">#FF5B21C4</Color>
+    <Color x:Key="Impero.AccentLightColor">#FF9B6BFF</Color>
+    <Color x:Key="Impero.CyanColor">#FF00D4FF</Color>
+    <Color x:Key="Impero.GreenColor">#FF00E676</Color>
+    <Color x:Key="Impero.OrangeColor">#FFFF8C00</Color>
+    <Color x:Key="Impero.PinkColor">#FFFF2E88</Color>
+
+    <Color x:Key="Impero.TextPrimaryColor">#FFF2F2F5</Color>
+    <Color x:Key="Impero.TextSecondaryColor">#FF8A8A99</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="Impero.Background" Color="{StaticResource Impero.BackgroundColor}" />
+    <SolidColorBrush x:Key="Impero.BackgroundDeep" Color="{StaticResource Impero.BackgroundDeepColor}" />
+    <SolidColorBrush x:Key="Impero.Surface" Color="{StaticResource Impero.SurfaceColor}" />
+    <SolidColorBrush x:Key="Impero.Card" Color="{StaticResource Impero.CardColor}" />
+    <SolidColorBrush x:Key="Impero.CardHover" Color="{StaticResource Impero.CardHoverColor}" />
+    <SolidColorBrush x:Key="Impero.Border" Color="{StaticResource Impero.BorderColor}" />
+    <SolidColorBrush x:Key="Impero.Sidebar" Color="{StaticResource Impero.SidebarColor}" />
+    <SolidColorBrush x:Key="Impero.Accent" Color="{StaticResource Impero.AccentColor}" />
+    <SolidColorBrush x:Key="Impero.AccentLight" Color="{StaticResource Impero.AccentLightColor}" />
+    <SolidColorBrush x:Key="Impero.Cyan" Color="{StaticResource Impero.CyanColor}" />
+    <SolidColorBrush x:Key="Impero.Green" Color="{StaticResource Impero.GreenColor}" />
+    <SolidColorBrush x:Key="Impero.Orange" Color="{StaticResource Impero.OrangeColor}" />
+    <SolidColorBrush x:Key="Impero.Pink" Color="{StaticResource Impero.PinkColor}" />
+    <SolidColorBrush x:Key="Impero.TextPrimary" Color="{StaticResource Impero.TextPrimaryColor}" />
+    <SolidColorBrush x:Key="Impero.TextSecondary" Color="{StaticResource Impero.TextSecondaryColor}" />
+
+    <!-- Accent gradient (buttons, avatar, active states) -->
+    <LinearGradientBrush x:Key="Impero.AccentGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource Impero.AccentLightColor}" Offset="0" />
+        <GradientStop Color="{StaticResource Impero.AccentColor}" Offset="0.5" />
+        <GradientStop Color="{StaticResource Impero.AccentDeepColor}" Offset="1" />
+    </LinearGradientBrush>
+
+    <!-- Window background: deep gradient with a subtle purple glow at the top -->
+    <RadialGradientBrush x:Key="Impero.WindowBackground"
+                         GradientOrigin="0.15,0.0" Center="0.15,0.0" RadiusX="1.1" RadiusY="1.1">
+        <GradientStop Color="#FF17111F" Offset="0" />
+        <GradientStop Color="#FF0A0A0E" Offset="0.55" />
+        <GradientStop Color="#FF070709" Offset="1" />
+    </RadialGradientBrush>
+
+    <SolidColorBrush x:Key="Impero.SoftAccent" Color="#3A7B39ED" />
+
+    <!-- ============================================================ Typography -->
+    <Style x:Key="Impero.H1" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{StaticResource Impero.TextPrimary}" />
+    </Style>
+
+    <Style x:Key="Impero.Subtitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12.5" />
+        <Setter Property="Foreground" Value="{StaticResource Impero.TextSecondary}" />
+    </Style>
+
+    <Style x:Key="Impero.SectionLabel" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{StaticResource Impero.TextSecondary}" />
+        <Setter Property="Opacity" Value="0.8" />
+    </Style>
+
+    <!-- ============================================================ Buttons -->
+    <Style x:Key="Impero.PrimaryButton" TargetType="Button">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Padding" Value="16,9" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="9"
+                            Background="{StaticResource Impero.AccentGradient}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="{StaticResource Impero.AccentColor}"
+                                                      BlurRadius="20" ShadowDepth="0" Opacity="0.7" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.35" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Impero.SecondaryButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource Impero.TextPrimary}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Padding" Value="16,9" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="9"
+                            Background="{StaticResource Impero.Card}"
+                            BorderBrush="{StaticResource Impero.Border}"
+                            BorderThickness="1"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Impero.Accent}" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Impero.CardHover}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Impero.GhostButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource Impero.TextSecondary}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Padding" Value="12,9" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="9" Background="Transparent"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Impero.CardHover}" />
+                            <Setter Property="Foreground" Value="{StaticResource Impero.TextPrimary}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Round icon button (header quick actions) -->
+    <Style x:Key="Impero.IconButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource Impero.TextSecondary}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="10"
+                            Background="{StaticResource Impero.Surface}"
+                            BorderBrush="{StaticResource Impero.Border}"
+                            BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Impero.Accent}" />
+                            <Setter Property="Foreground" Value="{StaticResource Impero.AccentLight}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================ Sidebar nav item -->
+    <Style x:Key="Impero.NavItem" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource Impero.TextSecondary}" />
+        <Setter Property="Height" Value="46" />
+        <Setter Property="Margin" Value="12,3" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontSize" Value="13.5" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid>
+                        <Border x:Name="Bg" CornerRadius="11" Background="Transparent" />
+                        <Border x:Name="Bar" Width="3.5" Height="22" HorizontalAlignment="Left"
+                                Margin="0" CornerRadius="2" Background="Transparent" />
+                        <ContentPresenter Margin="16,0,0,0" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bg" Property="Background" Value="{StaticResource Impero.CardHover}" />
+                            <Setter Property="Foreground" Value="{StaticResource Impero.TextPrimary}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Bg" Property="Background" Value="{StaticResource Impero.SoftAccent}" />
+                            <Setter TargetName="Bar" Property="Background" Value="{StaticResource Impero.AccentGradient}" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================ Category list (dashboard) -->
+    <Style x:Key="Impero.CategoryList" TargetType="ListBox">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource Impero.TextPrimary}" />
+    </Style>
+
+    <Style x:Key="Impero.CategoryItem" TargetType="ListBoxItem">
+        <Setter Property="Padding" Value="12,9" />
+        <Setter Property="Margin" Value="2,1" />
+        <Setter Property="Foreground" Value="{StaticResource Impero.TextSecondary}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Bd" Background="Transparent" CornerRadius="9"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Impero.CardHover}" />
+                            <Setter Property="Foreground" Value="{StaticResource Impero.TextPrimary}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Impero.SoftAccent}" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================ Tool card -->
+    <Style x:Key="Impero.ToolCard" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource Impero.Card}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Impero.Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="18" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource Impero.CardHover}" />
+                <Setter Property="BorderBrush" Value="{StaticResource Impero.Accent}" />
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="{StaticResource Impero.AccentColor}"
+                                          BlurRadius="26" ShadowDepth="0" Opacity="0.4" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Generic panel/card container -->
+    <Style x:Key="Impero.Panel" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource Impero.Surface}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Impero.Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="12" />
+    </Style>
+
+    <!-- ============================================================ Progress bar -->
+    <Style x:Key="Impero.ProgressBar" TargetType="ProgressBar">
+        <Setter Property="Height" Value="6" />
+        <Setter Property="Foreground" Value="{StaticResource Impero.Accent}" />
+        <Setter Property="Background" Value="{StaticResource Impero.Border}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Border CornerRadius="3" Background="{TemplateBinding Background}">
+                        <Grid ClipToBounds="True">
+                            <Border x:Name="PART_Track" />
+                            <Border x:Name="PART_Indicator" HorizontalAlignment="Left"
+                                    CornerRadius="3" Background="{StaticResource Impero.AccentGradient}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

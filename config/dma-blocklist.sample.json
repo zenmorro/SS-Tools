@@ -1,0 +1,6 @@
+[
+  { "vendor": "10ee", "device": "0666", "name": "PCIeScreamer / PCILeech (Device ID di default 0x0666)" },
+  { "vendor": "10ee", "device": "0007", "name": "Xilinx 0x0007 - usato da alcune build PCILeech" },
+  { "vendor": "10ee", "device": "8011", "name": "Xilinx 0x8011 - visto su alcune DMA card" },
+  { "vendor": "1204", "device": "0001", "name": "Lattice 0x0001 - DMA card economiche" }
+]

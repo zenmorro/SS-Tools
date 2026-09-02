@@ -1,0 +1,194 @@
+<Page x:Class="ForensicKit.App.Views.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:vm="clr-namespace:ForensicKit.App.ViewModels"
+      d:DataContext="{d:DesignInstance Type=vm:DashboardViewModel}"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Background="Transparent"
+      Title="Dashboard">
+
+    <Grid Margin="28,8,28,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                <TextBlock Text="Catalogo tool forensi" Style="{StaticResource Impero.H1}" />
+                <TextBlock Text="{Binding CatalogSource}" Style="{StaticResource Impero.Subtitle}"
+                           Margin="0,3,0,0" />
+            </StackPanel>
+
+            <ui:TextBox Grid.Column="1" Width="300" Margin="0,0,12,0" VerticalAlignment="Center"
+                        PlaceholderText="Cerca per nome, autore, descrizione…"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=150}">
+                <ui:TextBox.Icon>
+                    <ui:SymbolIcon Symbol="Search24" />
+                </ui:TextBox.Icon>
+            </ui:TextBox>
+
+            <Button Grid.Column="2" Style="{StaticResource Impero.IconButton}"
+                    ToolTip="Aggiorna catalogo" Command="{Binding RefreshCommand}">
+                <ui:SymbolIcon Symbol="ArrowSync24" FontSize="18" />
+            </Button>
+        </Grid>
+
+        <!-- Body -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="210" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Categories -->
+            <Border Grid.Column="0" Style="{StaticResource Impero.Panel}"
+                    Margin="0,0,20,0" Padding="8">
+                <StackPanel>
+                    <TextBlock Text="CATEGORIE" Style="{StaticResource Impero.SectionLabel}"
+                               Margin="12,10,0,8" />
+                    <ListBox ItemsSource="{Binding Categories}"
+                             SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                             Style="{StaticResource Impero.CategoryList}"
+                             ItemContainerStyle="{StaticResource Impero.CategoryItem}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+
+            <!-- Cards -->
+            <Grid Grid.Column="1">
+                <ui:ProgressRing IsIndeterminate="True" Width="36" Height="36"
+                                 HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0"
+                                 Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}" />
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding VisibleTools}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type vm:ToolCardViewModel}">
+                                <Border Width="336" Margin="0,0,18,18" Style="{StaticResource Impero.ToolCard}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Header -->
+                                        <Grid Grid.Row="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0" Width="46" Height="46" CornerRadius="13"
+                                                    Background="{StaticResource Impero.AccentGradient}"
+                                                    Margin="0,0,13,0">
+                                                <TextBlock Text="{Binding Initials}" Foreground="White"
+                                                           FontSize="20" FontWeight="Bold"
+                                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Name}" FontSize="16.5" FontWeight="SemiBold"
+                                                           Foreground="{StaticResource Impero.TextPrimary}"
+                                                           TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding Author}" FontSize="11.5"
+                                                           Foreground="{StaticResource Impero.TextSecondary}"
+                                                           TextTrimming="CharacterEllipsis" />
+                                            </StackPanel>
+
+                                            <Button Grid.Column="2" Style="{StaticResource Impero.GhostButton}"
+                                                    Padding="8" ToolTip="Preferito"
+                                                    Command="{Binding ToggleFavoriteCommand}">
+                                                <ui:SymbolIcon Symbol="Star24" FontSize="18"
+                                                               Foreground="{Binding IsFavorite, Converter={StaticResource FavoriteBrush}}" />
+                                            </Button>
+                                        </Grid>
+
+                                        <!-- Badge -->
+                                        <Border Grid.Row="1" HorizontalAlignment="Left" CornerRadius="20"
+                                                Padding="10,4" Margin="0,14,0,0"
+                                                Background="{Binding Status, Converter={StaticResource StatusToBrush}}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Ellipse Width="7" Height="7" VerticalAlignment="Center"
+                                                         Fill="{Binding Status, Converter={StaticResource StatusToForeground}}" />
+                                                <TextBlock Text="{Binding Status, Converter={StaticResource StatusToText}}"
+                                                           FontSize="11" FontWeight="SemiBold" Margin="7,0,0,0"
+                                                           Foreground="{Binding Status, Converter={StaticResource StatusToForeground}}" />
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!-- Description -->
+                                        <TextBlock Grid.Row="2" Text="{Binding Description}"
+                                                   Foreground="{StaticResource Impero.TextSecondary}"
+                                                   FontSize="12.5" TextWrapping="Wrap" MaxHeight="58"
+                                                   TextTrimming="CharacterEllipsis" Margin="0,13,0,0"
+                                                   LineHeight="18" />
+
+                                        <!-- Progress -->
+                                        <StackPanel Grid.Row="3" Margin="0,12,0,0"
+                                                    Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}">
+                                            <ProgressBar Value="{Binding ProgressPercent}" Maximum="100"
+                                                         Style="{StaticResource Impero.ProgressBar}" />
+                                            <TextBlock Text="{Binding StatusDetail}" FontSize="11"
+                                                       Foreground="{StaticResource Impero.TextSecondary}"
+                                                       Margin="0,5,0,0" />
+                                        </StackPanel>
+
+                                        <!-- Actions -->
+                                        <Grid Grid.Row="4" Margin="0,16,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Grid.Column="0" Content="Scarica" Margin="0,0,8,0"
+                                                    Style="{StaticResource Impero.PrimaryButton}"
+                                                    Command="{Binding DownloadCommand}" />
+                                            <Button Grid.Column="1" Content="Esegui" Margin="0,0,8,0"
+                                                    Style="{StaticResource Impero.SecondaryButton}"
+                                                    Command="{Binding RunCommand}" />
+                                            <Button Grid.Column="2" Style="{StaticResource Impero.GhostButton}"
+                                                    ToolTip="Info" Command="{Binding InfoCommand}">
+                                                <ui:SymbolIcon Symbol="Info24" FontSize="18" />
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+
+        <!-- Footer -->
+        <TextBlock Grid.Row="2" Text="{Binding StatusMessage}"
+                   Foreground="{StaticResource Impero.TextSecondary}" FontSize="12" Margin="0,12,0,0" />
+    </Grid>
+</Page>

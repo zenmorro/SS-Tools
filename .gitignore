@@ -1,0 +1,17 @@
+# Build output
+bin/
+obj/
+publish/
+*.user
+
+# Rider / VS
+.vs/
+.idea/
+
+# NuGet
+*.nupkg
+packages/
+
+# OS
+Thumbs.db
+Desktop.ini

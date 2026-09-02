@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>ForensicKit.App</RootNamespace>
+    <AssemblyName>ForensicKit</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+
+    <!-- Self-contained single-file publish defaults -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WPF-UI" Version="3.0.5" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ForensicKit.Core\ForensicKit.Core.csproj" />
+  </ItemGroup>
+
+  <!-- Embed the bundled catalog so the app always has a working offline fallback. -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\manifests\tools.json">
+      <Link>Resources\tools.json</Link>
+      <LogicalName>ForensicKit.App.tools.json</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- Embed the PowerShell scripts (they are never downloaded at runtime). -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\ForensicKit.Scripts\*.ps1">
+      <Link>Scripts\%(Filename)%(Extension)</Link>
+      <LogicalName>ForensicKit.Scripts.%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

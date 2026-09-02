@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ForensicKit.App/ForensicKit.App.csproj" />
+    <Project Path="src/ForensicKit.Core/ForensicKit.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ForensicKit.Core.Tests/ForensicKit.Core.Tests.csproj" />
+  </Folder>
+</Solution>

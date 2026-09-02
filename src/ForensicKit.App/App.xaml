@@ -1,0 +1,24 @@
+<Application x:Class="ForensicKit.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:conv="clr-namespace:ForensicKit.App.Converters">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemesDictionary Theme="Dark" />
+                <ui:ControlsDictionary />
+                <ResourceDictionary Source="pack://application:,,,/Themes/ImperoTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <conv:StatusToBrushConverter x:Key="StatusToBrush" />
+            <conv:StatusToForegroundConverter x:Key="StatusToForeground" />
+            <conv:StatusToTextConverter x:Key="StatusToText" />
+            <conv:SeverityToBrushConverter x:Key="SeverityToBrush" />
+            <conv:SeverityToForegroundConverter x:Key="SeverityToForeground" />
+            <conv:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+            <conv:InverseBoolConverter x:Key="InverseBool" />
+            <conv:FavoriteBrushConverter x:Key="FavoriteBrush" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

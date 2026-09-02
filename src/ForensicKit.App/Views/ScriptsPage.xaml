@@ -1,0 +1,99 @@
+<Page x:Class="ForensicKit.App.Views.ScriptsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:vm="clr-namespace:ForensicKit.App.ViewModels"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      d:DataContext="{d:DesignInstance Type=vm:ScriptsViewModel}"
+      mc:Ignorable="d"
+      Background="Transparent"
+      Title="Script PowerShell">
+
+    <Grid Margin="28,8,28,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="Script PowerShell integrati" Style="{StaticResource Impero.H1}" />
+            <TextBlock Text="Script inclusi nell'app (non scaricati da remoto) per la raccolta di informazioni di sistema."
+                       Style="{StaticResource Impero.Subtitle}" Margin="0,3,0,0" />
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="340" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Script list -->
+            <Border Grid.Column="0" Style="{StaticResource Impero.Panel}" Margin="0,0,20,0" Padding="10">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Bottom" Margin="4,10,4,4">
+                        <CheckBox Content="Esegui con elevazione (UAC)" IsChecked="{Binding RunElevated}"
+                                  Foreground="{StaticResource Impero.TextSecondary}" Margin="0,0,0,10" />
+                        <Button Content="▶  Esegui script" Style="{StaticResource Impero.PrimaryButton}"
+                                HorizontalAlignment="Stretch" Command="{Binding RunCommand}" Margin="0,0,0,8" />
+                        <Button Content="Annulla" Style="{StaticResource Impero.SecondaryButton}"
+                                HorizontalAlignment="Stretch" Command="{Binding CancelCommand}" />
+                    </StackPanel>
+
+                    <TextBlock DockPanel.Dock="Top" Text="SCRIPT DISPONIBILI"
+                               Style="{StaticResource Impero.SectionLabel}" Margin="6,4,0,8" />
+
+                    <ListBox ItemsSource="{Binding Scripts}"
+                             SelectedItem="{Binding SelectedScript, Mode=TwoWay}"
+                             Style="{StaticResource Impero.CategoryList}"
+                             ItemContainerStyle="{StaticResource Impero.CategoryItem}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2,4">
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="13"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock Text="{Binding Description}" Opacity="0.7" FontSize="11"
+                                               TextWrapping="Wrap" Margin="0,3,0,0" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Border>
+
+            <!-- Console -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <ui:ProgressRing IsIndeterminate="True" Width="18" Height="18" Margin="0,0,10,0"
+                                         Visibility="{Binding IsRunning, Converter={StaticResource BoolToVisibility}}" />
+                        <TextBlock Text="OUTPUT" Style="{StaticResource Impero.SectionLabel}" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Esporta .txt" Style="{StaticResource Impero.GhostButton}"
+                                Command="{Binding ExportTxtCommand}" />
+                        <Button Content="Esporta .json" Style="{StaticResource Impero.GhostButton}"
+                                Margin="6,0,0,0" Command="{Binding ExportJsonCommand}" />
+                    </StackPanel>
+                </Grid>
+
+                <Border Grid.Row="1" Background="{StaticResource Impero.BackgroundDeep}"
+                        CornerRadius="12" BorderBrush="{StaticResource Impero.Border}" BorderThickness="1">
+                    <ScrollViewer x:Name="OutputScroll" VerticalScrollBarVisibility="Auto" Padding="14">
+                        <TextBox Text="{Binding ConsoleOutput, Mode=OneWay}" IsReadOnly="True"
+                                 Background="Transparent" BorderThickness="0"
+                                 Foreground="{StaticResource Impero.Green}"
+                                 FontFamily="Consolas, Cascadia Mono, monospace" FontSize="12.5"
+                                 TextWrapping="NoWrap" VerticalScrollBarVisibility="Disabled"
+                                 HorizontalScrollBarVisibility="Auto" />
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

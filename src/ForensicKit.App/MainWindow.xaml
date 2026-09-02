@@ -1,0 +1,123 @@
+<ui:FluentWindow x:Class="ForensicKit.App.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 Title="ForensicKit"
+                 Width="1240" Height="800"
+                 MinWidth="960" MinHeight="620"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowBackdropType="None"
+                 Background="{StaticResource Impero.WindowBackground}"
+                 WindowCornerPreference="Round"
+                 WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="248" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- ============================ SIDEBAR ============================ -->
+        <Border Grid.Column="0" Background="{StaticResource Impero.Sidebar}"
+                BorderBrush="{StaticResource Impero.Border}" BorderThickness="0,0,1,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Brand -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,26,20,8">
+                    <Border Width="44" Height="44" CornerRadius="12"
+                            Background="{StaticResource Impero.AccentGradient}">
+                        <Border.Effect>
+                            <DropShadowEffect Color="{StaticResource Impero.AccentColor}"
+                                              BlurRadius="18" ShadowDepth="0" Opacity="0.6" />
+                        </Border.Effect>
+                        <ui:SymbolIcon Symbol="ShieldTask24" Foreground="White" FontSize="22"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="ForensicKit" FontSize="18" FontWeight="Bold"
+                                   Foreground="{StaticResource Impero.TextPrimary}" />
+                        <TextBlock Text="Analysis Launcher" FontSize="10.5"
+                                   Foreground="{StaticResource Impero.TextSecondary}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <TextBlock Grid.Row="1" Text="MENU" Style="{StaticResource Impero.SectionLabel}"
+                           Margin="28,18,0,6" />
+
+                <!-- Navigation -->
+                <StackPanel Grid.Row="2">
+                    <RadioButton x:Name="NavDashboard" GroupName="nav"
+                                 Style="{StaticResource Impero.NavItem}" Checked="Nav_Checked" Tag="dashboard">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Apps24" FontSize="18" />
+                            <TextBlock Text="Dashboard" Margin="12,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton x:Name="NavScripts" GroupName="nav"
+                                 Style="{StaticResource Impero.NavItem}" Checked="Nav_Checked" Tag="scripts">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Code24" FontSize="18" />
+                            <TextBlock Text="Script PowerShell" Margin="12,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton x:Name="NavTimeline" GroupName="nav"
+                                 Style="{StaticResource Impero.NavItem}" Checked="Nav_Checked" Tag="timeline">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Timeline24" FontSize="18" />
+                            <TextBlock Text="Timeline anti-forense" Margin="12,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton x:Name="NavLogs" GroupName="nav"
+                                 Style="{StaticResource Impero.NavItem}" Checked="Nav_Checked" Tag="logs">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="History24" FontSize="18" />
+                            <TextBlock Text="Log / Cronologia" Margin="12,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton x:Name="NavSettings" GroupName="nav"
+                                 Style="{StaticResource Impero.NavItem}" Checked="Nav_Checked" Tag="settings">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Settings24" FontSize="18" />
+                            <TextBlock Text="Impostazioni" Margin="12,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+
+                <!-- Footer -->
+                <Border Grid.Row="3" Margin="16,10,16,16" Padding="14" Style="{StaticResource Impero.Panel}"
+                        Background="{StaticResource Impero.Surface}">
+                    <StackPanel>
+                        <TextBlock Text="Solo per uso autorizzato" FontSize="11" FontWeight="SemiBold"
+                                   Foreground="{StaticResource Impero.AccentLight}" />
+                        <TextBlock Text="I tool sono soggetti alle rispettive licenze."
+                                   FontSize="10.5" TextWrapping="Wrap" Margin="0,3,0,0"
+                                   Foreground="{StaticResource Impero.TextSecondary}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- ============================ CONTENT ============================ -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ui:TitleBar Grid.Row="0" Title="" ShowMaximize="True" ShowMinimize="True" />
+
+            <Frame x:Name="ContentFrame" Grid.Row="1"
+                   NavigationUIVisibility="Hidden" Background="Transparent" />
+        </Grid>
+    </Grid>
+</ui:FluentWindow>
