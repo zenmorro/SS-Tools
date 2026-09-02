@@ -1,17 +1,98 @@
-# Build output
-bin/
-obj/
+## ============================================================
+##  ForensicKit - .gitignore
+##  Tutto cio' che NON deve finire su GitHub (build, cache, IDE,
+##  output runtime, artefatti locali). Il codice sorgente, i
+##  manifest, gli script .ps1, i docs e gli screenshot restano.
+## ============================================================
+
+# ---- Output di build .NET ----
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
 publish/
-*.user
+[Pp]ublish/
+artifacts/
+*.dll
+*.exe
+*.pdb
+*.deps.json
+*.runtimeconfig.json
 
-# Rider / VS
-.vs/
-.idea/
-
-# NuGet
+# ---- Pubblicazione / packaging ----
+*.app.publish/
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+*.zip
+*.7z
 *.nupkg
-packages/
+*.snupkg
 
-# OS
+# ---- Cache/artefatti NuGet e MSBuild ----
+project.assets.json
+*.nuget.props
+*.nuget.targets
+*.binlog
+*.g.cs
+*.g.i.cs
+*.AssemblyInfo.cs
+.msbuild/
+
+# ---- IDE: Visual Studio / Rider / VS Code ----
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.DotSettings.user
+_ReSharper*/
+*.ncrunch*
+.rider/
+
+# ---- Test / coverage ----
+[Tt]est[Rr]esult*/
+TestResults/
+coverage*/
+*.coverage
+*.coveragexml
+*.trx
+
+# ---- Log e file temporanei ----
+*.log
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# ---- Output runtime dell'app (se generato dentro al repo) ----
+# I dati veri stanno in %APPDATA%\ForensicKit, ma per sicurezza:
+AntiForensicHunter_Output/
+ForensicKit_Output/
+*-report.json
+dma-report.json
+proc-report.json
+
+# ---- Screenshot temporanei di lavoro (quelli "buoni" stanno in docs/images) ----
+shot-*.png
+screenshot-*.png
+
+# ---- Sistema operativo ----
 Thumbs.db
+ehthumbs.db
 Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ---- OneDrive / sync ----
+*.tmp.driveupload
+*.tmp.drivedownload
+
+# ---- Segreti / configurazioni locali (non commettere credenziali) ----
+*.pfx
+*.snk
+appsettings.*.local.json
+secrets.json
+.env
